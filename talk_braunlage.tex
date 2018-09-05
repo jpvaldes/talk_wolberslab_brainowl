@@ -15,6 +15,7 @@
 % \setmathfont{latinmodern-math.otf}
 % \setmathfont{Asana-Math.otf}
 % \usepackage{mathpazo}
+\usepackage{appendixnumberbeamer}
 \usepackage{booktabs}
 \usepackage[backend=biber,style=chem-acs,autocite=footnote]{biblatex}
 \addbibresource{talk_braunlage.bib}
@@ -299,6 +300,16 @@
     Thank you! \\
     Questions?
 \end{frame}
+
+%% -- backup slides --
+%% backup slides go after appendix as normal frames. See theme documentation
+%% and include \usepackage{appendixnumberbeamer} so that they do not count
+%% towards the total number of slides in the main presentation
+\appendix
+\begin{frame}{Appendix}
+    SpaRSA implementation
+\end{frame}
+
 \end{document}
 % Local Variables:
 % TeX-engine: xetex
