@@ -2,7 +2,7 @@ PDF          = talk_braunlage.pdf
 SRC          = talk_braunlage.tex
 BIB          = talk_braunlage.bib
 OUTPUT_DIR   := $(shell pwd)/latex-output
-COMPILE      := latexmk -xelatex -output-directory = $(OUTPUT_DIR)
+COMPILE      := latexmk -xelatex -output-directory=$(OUTPUT_DIR)
 
 .PHONY: all pdf clean clean-output
 
