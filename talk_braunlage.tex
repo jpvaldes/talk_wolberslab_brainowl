@@ -9,9 +9,9 @@
 \metroset{background=light}
 \usepackage{mathspec}
 \usepackage{unicode-math}
-\setmathfont[Scale=1.05]{xits-math.otf}
+% \setmathfont[Scale=1.05]{xits-math.otf}
 \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
-% \setmathfont{TeX Gyre Pagella Math}
+\setmathfont[Scale=MatchLowercase]{TeX Gyre Pagella Math}
 % \setmathfont{latinmodern-math.otf}
 % \setmathfont{Asana-Math.otf}
 % \usepackage{mathpazo}
@@ -60,8 +60,8 @@
         \includegraphics[scale=0.25]{figures/4d_data.png}
     \end{center}
 
-    A typical fMRI session consists of around 200 3-D volumes, and each 3-D
-    volume contains 10$^5$ to 10$^6$ voxels.
+    A typical fMRI session consists of around $10^2$ 3-D volumes, and each 3-D
+    volume contains $10^5$ to $10^6$ voxels.
 
 \end{frame}
 \begin{frame}
