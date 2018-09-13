@@ -37,6 +37,85 @@
 
 \maketitle
 
+\section{Introduction}
+
+\begin{frame}
+    \frametitle{BOLD fMRI}
+    I work mainly in functional MRI (fMRI) data analysis, and, in particular,
+    task related. 
+    \begin{center}
+        \includegraphics[scale=0.25]{figures/scanner_task.png}
+    \end{center}
+
+    This means that during scanning, the participant performs a behavioral task.
+
+\end{frame}
+\begin{frame}
+    \frametitle{fMRI data}
+
+    Structural MRI images are 3-D. fMRI adds a new dimension: time. That
+    allows us to analyse how brain activity changes during the task.
+
+    \begin{center}
+        \includegraphics[scale=0.25]{figures/4d_data.png}
+    \end{center}
+
+    A typical fMRI session consists of around 200 3-D volumes, and each 3-D
+    volume contains 10$^5$ to 10$^6$ voxels.
+
+\end{frame}
+\begin{frame}
+    \frametitle{Putting it all together}
+    
+    We can analyse the data to detect changes in activation. 
+
+    \begin{center}
+        \includegraphics[scale=0.1]{figures/glm.png}
+    \end{center}
+
+    That analysis is done using a General Linear Model (GLM) and is univariate.
+
+\end{frame}
+
+\section{Decoding}
+\label{sec:Decoding}
+
+\begin{frame}
+    \frametitle{Asking about categories}
+
+    Maybe we would like to ask different scientific questions:
+    \begin{enumerate}
+        \item Can we distinguish categories from the task?
+        \item Can we find the voxels that discriminate among those categories?
+    \end{enumerate}
+
+\end{frame}
+\begin{frame}
+    \frametitle{Regularization}
+    Necessary help to find solutions.
+\end{frame}
+\begin{frame}
+    \frametitle{Structured sparsity}
+    What we expect. What this solves: interpretation.
+\end{frame}
+\begin{frame}
+    \frametitle{TV-L1 and Graph-Net}
+    State of the art classifiers.    
+\end{frame}
+\begin{frame}
+    \frametitle{BrainOwl}
+    New development. Public introduction.
+\end{frame}
+\begin{frame}
+    \frametitle{How do results look like}
+    Demo with simulated data. Easy to show ground truth. 
+\end{frame}
+\begin{frame}
+    \frametitle{Results from a real fMRI task}
+    Show head direction data results: room category. 
+\end{frame}
+
+% option [t] causes text to be flushed to the top
 \begin{frame}[t]
   \frametitle{Why structured sparsity?}
   In a multivariate analysis,
@@ -309,7 +388,9 @@
 \begin{frame}{Appendix}
     SpaRSA implementation
 \end{frame}
-
+\begin{frame}{Taks fMRI Decoding}
+    Predict the behavioral task, i.e. category or class.
+\end{frame}
 \end{document}
 % Local Variables:
 % TeX-engine: xetex
