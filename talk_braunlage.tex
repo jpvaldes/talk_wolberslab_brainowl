@@ -11,7 +11,7 @@
 \usepackage{unicode-math}
 % \setmathfont[Scale=1.05]{xits-math.otf}
 \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
-\setmathfont[Scale=MatchLowercase]{TeX Gyre Pagella Math}
+\setmathsfont[Scale=MatchLowercase,Lowercase=Regular]{TeX Gyre Pagella Math}
 % \setmathfont{latinmodern-math.otf}
 % \setmathfont{Asana-Math.otf}
 % \usepackage{mathpazo}
@@ -88,30 +88,94 @@
         \item Can we find the voxels that discriminate among those categories?
     \end{enumerate}
 
+    \begin{center}
+        \includegraphics[scale=0.2]{figures/decoding.png}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Model}
+    Our proposal to answer those questions is to use a linear model. We need
+    some help, however. We have too many voxels (features) and too few images
+    (samples). 
+
+    \[y = Xw\]
+
+    That is why we add an extra term to the problem to be solved called
+    regularization, $J(w)$.
+
+    \[\hat{w} = \argmin_{w} \mathcal{L}\left(y, X, w \right) + J(w) \]
+
+    The solution that we obtain is a vector of weights, $\hat{w}$. One weight
+    per voxel.
+\end{frame}
+
+\begin{frame}{If things were this easy\ldots}
+    Only two features (e.g., voxels) and many samples:
+
+    \begin{center}
+        \includegraphics[scale=0.3]{figures/grad_descent_result.png}        
+    \end{center}
+\end{frame}
+
+\begin{frame}{How does it look with real data?}
+
+    In this task, participants could be in any of four different rooms. We ask
+    the decoder if it can tell us in which room is the participant.
+
+    \begin{center}
+        \includegraphics[scale=0.7]{figures/lsvc_l2-axial.png}
+    \end{center}
+
+    This is a \emph{dense} solution. It is easy to see where are the main areas
+    involved, but what about the rest?
+
+\end{frame}
+
+\section{Structured sparsity}
+\label{sec:Structured sparsity}
+
+\begin{frame}
+    \frametitle{Sparsity}
+    The so-called LASSO or $l_1$ regularization impose \emph{sparsity} in the
+    solution, i.e., non-informative features are weighted 0. 
+
+    This makes the solution directly more interpretable, but are those voxels
+    too few?  
+
 \end{frame}
 \begin{frame}
-    \frametitle{Regularization}
-    Necessary help to find solutions.
-\end{frame}
-\begin{frame}
-    \frametitle{Structured sparsity}
-    What we expect. What this solves: interpretation.
-\end{frame}
-\begin{frame}
-    \frametitle{TV-L1 and Graph-Net}
-    State of the art classifiers.    
+    \frametitle{Structured sparsity\footprnifullcite{baldassarre2012a}}
+    This is a middle-point solution between a sparse and a dense solution.
+    Highlight whole relevant areas involved in category discrimination and not
+    scattered voxels.
+
+
 \end{frame}
 \begin{frame}
     \frametitle{BrainOwl}
-    New development. Public introduction.
+    BrainOwl is a classifier based on the \emph{Ordered Weighted} $l_1$
+    (OWL)\footlessfullcite{zeng2014-owl} norm.
+
+    \[J_v(w) = \sum_{i=1}^{n} |w|_{[i]} v_i = v^T |w|_{\downarrow}\]
+
+    There are Implementations of another interesting structured sparsity
+    decoders implemented like \emph{Sparse Total Variation}
+    (TV-$l_1$)\footprnifullcite{gramfort2013} or
+    \emph{Graph-Net}\footlessfullcite{grosenick2013}.
+
 \end{frame}
 \begin{frame}
     \frametitle{How do results look like}
     Demo with simulated data. Easy to show ground truth. 
 \end{frame}
 \begin{frame}
-    \frametitle{Results from a real fMRI task}
-    Show head direction data results: room category. 
+    \frametitle{BrainOwl, real fMRI task}
+
+    \begin{center}
+        \includegraphics[scale=0.7]{figures/brainowl-axial.png}
+    \end{center}
 \end{frame}
 
 % option [t] causes text to be flushed to the top
