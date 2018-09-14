@@ -141,15 +141,19 @@
     The so-called LASSO or $l_1$ regularization impose \emph{sparsity} in the
     solution, i.e., non-informative features are weighted 0. 
 
+    \begin{center}
+        \includegraphics[scale=0.7]{figures/lsvc_l1-axial.png}
+    \end{center}
+
     This makes the solution directly more interpretable, but are those voxels
     too few?  
 
 \end{frame}
 \begin{frame}
     \frametitle{Structured sparsity\footprnifullcite{baldassarre2012a}}
-    This is a middle-point solution between a sparse and a dense solution.
-    Highlight whole relevant areas involved in category discrimination and not
-    scattered voxels.
+    We would like to reach a middle ground between a sparse and a dense
+    solution where whole relevant areas involved in category discrimination are
+    weighted different from 0.
 
 
 \end{frame}
@@ -167,11 +171,19 @@
 
 \end{frame}
 \begin{frame}
-    \frametitle{How do results look like}
-    Demo with simulated data. Easy to show ground truth. 
+    \frametitle{The story so far}
+    
+    Dense, sparse, and structured sparse solutions from simulated data in
+    manually segmented subiculum.
+
+    \begin{center}
+        \includegraphics[scale=0.35]{figures/template_and_weights_4_clfs.png}
+    \end{center}
+
 \end{frame}
 \begin{frame}
-    \frametitle{BrainOwl, real fMRI task}
+    \frametitle{Rooms question revisited}
+
 
     \begin{center}
         \includegraphics[scale=0.7]{figures/brainowl-axial.png}
@@ -188,10 +200,8 @@
   \item ease interpretation of results.
   \end{itemize}
     % \footlessfullcite{Grosenick2013} 
-  \begin{center}
-    \includegraphics[scale=0.1]{figures/grosenick_fig1_tbg.png}
-  \end{center}
 \end{frame}
+
 \begin{frame}
   \frametitle{How is it implemented?}
   Structured sparsity
