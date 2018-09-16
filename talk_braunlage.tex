@@ -85,7 +85,7 @@
     Maybe we would like to ask different scientific questions:
     \begin{enumerate}
         \item Can we distinguish categories from the task?
-        \item Can we find the voxels that discriminate among those categories?
+        \item Can we find cluster of voxels that discriminate among those categories?
     \end{enumerate}
 
     \begin{center}
@@ -119,44 +119,78 @@
     \end{center}
 \end{frame}
 
-\begin{frame}{How does it look with real data?}
+\begin{frame}[t]{How does it look with real data?}
 
-    In this task, participants could be in any of four different rooms. We ask
-    the decoder if it can tell us in which room is the participant.
+    In this task, participants could be in any of four different rooms. The
+    accuracy (ACC) tell us that most of the time the decoder identifies the
+    right room.
 
     \begin{center}
         \includegraphics[scale=0.7]{figures/lsvc_l2-axial.png}
     \end{center}
 
-    This is a \emph{dense} solution. It is easy to see where are the main areas
-    involved, but what about the rest?
+    This is a \emph{dense} solution; all weights are different from zero. But,
+    we would like to automatically select the most relevant voxels, and
+    make the rest 0.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sparsity}
+
+    We can also find a \emph{sparse} solution, i.e., many voxel weights are set
+    to 0.
+
+    \begin{center}
+        \includegraphics[scale=0.7]{figures/lsvc_l1-axial.png}
+    \end{center}
+
+    In this solution many non-relevant voxels do not appear anymore, but are
+    those voxels remaining in the weight map too few and scattered? Is that
+    solution unique?
 
 \end{frame}
 
 \section{Structured sparsity}
 \label{sec:Structured sparsity}
 
+% option [t] causes text to be flushed to the top
 \begin{frame}
-    \frametitle{Sparsity}
-    The so-called LASSO or $l_1$ regularization impose \emph{sparsity} in the
-    solution, i.e., non-informative features are weighted 0. 
+    \frametitle{Why structured sparsity?\footprnifullcite{baldassarre2012a}}
+
+    So far pros and cons.
 
     \begin{center}
-        \includegraphics[scale=0.7]{figures/lsvc_l1-axial.png}
-    \end{center}
+        \begin{tabular}[h]{@{}lll@{}}
+            & Pros & Cons \\
+            \cmidrule(r){2-3}
+            Dense & stable & all voxels appear relevant \\
+            Sparse & few chosen voxels & unstable
+        \end{tabular}
+    \end{center} 
+    
+    \pause
 
-    This makes the solution directly more interpretable, but are those voxels
-    too few?  
+    Structured sparsity offers a middle ground solution where whole relevant
+    areas are selected and the solution is stable.
 
 \end{frame}
+
 \begin{frame}
-    \frametitle{Structured sparsity\footprnifullcite{baldassarre2012a}}
-    We would like to reach a middle ground between a sparse and a dense
-    solution where whole relevant areas involved in category discrimination are
-    weighted different from 0.
+    \frametitle{Structured sparsity}
+    In a multivariate analysis,
+    \begin{itemize}
+        \item take into consideration spatial and temporal information, \pause
+        \item recover the \emph{true} weight maps, \pause
+        \item ease interpretation of results. \pause
+    \end{itemize}
+    % \footlessfullcite{Grosenick2013} 
 
+    To favour structured sparsity solutions, we need to use particular
+    regularization terms.
 
 \end{frame}
+
 \begin{frame}
     \frametitle{BrainOwl}
     BrainOwl is a classifier based on the \emph{Ordered Weighted} $l_1$
@@ -164,90 +198,55 @@
 
     \[J_v(w) = \sum_{i=1}^{n} |w|_{[i]} v_i = v^T |w|_{\downarrow}\]
 
-    There are Implementations of another interesting structured sparsity
-    decoders implemented like \emph{Sparse Total Variation}
-    (TV-$l_1$)\footprnifullcite{gramfort2013} or
-    \emph{Graph-Net}\footlessfullcite{grosenick2013}.
+    The OWL norm is robust to correlations and can be implemented efficiently.
 
 \end{frame}
-\begin{frame}
-    \frametitle{The story so far}
-    
-    Dense, sparse, and structured sparse solutions from simulated data in
-    manually segmented subiculum.
 
-    \begin{center}
-        \includegraphics[scale=0.35]{figures/template_and_weights_4_clfs.png}
-    \end{center}
-
-\end{frame}
 \begin{frame}
     \frametitle{Rooms question revisited}
-
 
     \begin{center}
         \includegraphics[scale=0.7]{figures/brainowl-axial.png}
     \end{center}
-\end{frame}
 
-% option [t] causes text to be flushed to the top
-\begin{frame}[t]
-  \frametitle{Why structured sparsity?}
-  In a multivariate analysis,
-  \begin{itemize}
-  \item take into consideration spatial and temporal information,
-  \item recover the \emph{true} activation maps,
-  \item ease interpretation of results.
-  \end{itemize}
-    % \footlessfullcite{Grosenick2013} 
 \end{frame}
 
 \begin{frame}
-  \frametitle{How is it implemented?}
-  Structured sparsity
+    \frametitle{Dense, sparse, and structured sparse}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Software}
   \begin{itemize}
-  \item can be implemented as a \textbf{regression} problem,
-  \item that can be extended to \textbf{decoding},
-  \item and incorporates structural and temporal priors as
-    \textbf{regularization} terms.
+      \item BrainOwl \\ \texttt{github.com/jpvaldes/brainowl}
+          \\ Soon in \texttt{www.wolberslab.net}
+      \item nilearn \\ \texttt{nilearn.github.io}
+      \item scikit-learn \\ \texttt{scikit-learn.org}
   \end{itemize}
 \end{frame}
-\begin{frame}
-  \frametitle{Regression}
-  \begin{columns}
-    \begin{column}{0.55\linewidth}
-      A regression problem as a linear model is well known 
-      \[\mathbf{y} = f(\mathbf{X}, \mathbf{y}) = F(\mathbf{Xw}) = \mathbf{Xw}\]
-      % and has a closed-form solution
-      % \[\mathbf{X}^{T}\left( \mathbf{y} - \mathbf{Xw} \right) = 0\]
-      and can be solved as an optimization problem to find the \emph{normal equations}
-      \[\hat{\mathbf{w}} = \left( \mathbf{X}^{T}\mathbf{X}\right)^{-1}\mathbf{X}^{T}\mathbf{y}\]
-    \end{column}
-    \begin{column}{0.45\linewidth}
-      \includegraphics[scale=0.25]{figures/robust_linear_regression_with_outliers.png}
-    \end{column}
-  \end{columns}
-  % \vspace{0.5cm}
+\begin{frame}[standout]
+    Thank you! \\
+    Questions?
 \end{frame}
-\begin{frame}[t]
-  \frametitle{Regression and Polynomials}
-  \begin{columns}
-    \begin{column}{1.1\textwidth}
-      We are not restricted to linear relationships between \(\mathbf{X}\) and
-      \(\mathbf{y}\), but careful with underfitting or overfitting: keep a
-      validation set to test the model.
-    \end{column}
-  \end{columns}
-  \begin{center}
-    \includegraphics[scale=0.36]{figures/linear_model_underf_overf.png}
-  \end{center}
-  \begin{columns}
-    \begin{column}{1.1\textwidth}
-      For a discrete target variable, we have a classification problem; e.g.
-      \(\mathrm{sign}\left(\mathbf{Xw}\right)\) where $\mathbf{y}$ is either $1$
-      or $-1$.
-    \end{column}
-  \end{columns}
+
+%% -- backup slides --
+%% backup slides go after appendix as normal frames. See theme documentation
+%% and include \usepackage{appendixnumberbeamer} so that they do not count
+%% towards the total number of slides in the main presentation
+\appendix
+\begin{frame}
+    \frametitle{Summary}
+    
+    \begin{center}
+        \includegraphics[scale=0.35]{figures/template_and_weights_4_clfs.png}
+    \end{center}
+
+    There are other structured sparsity classifiers implemented like
+    \emph{Sparse Total Variation} (TV-$l_1$)\footprnifullcite{gramfort2013} or
+    \emph{Graph-Net}\footlessfullcite{grosenick2013}.
+
+
 \end{frame}
 \begin{frame}
   \frametitle{Classification: Interpretation}
@@ -283,8 +282,7 @@
   \item and is necessary to solve the mathematical problem when the number of
     dimensions is very high (because it is ill-posed).
   \end{itemize}
-  Regularization will also connect the ideas of structured and sparse
-  solutions, together with a linear model.
+
 \end{frame}
 \begin{frame}
   \frametitle{Regularization: How does it do it?}
@@ -332,33 +330,6 @@
 
   This is an ill-posed problem, thus we need regularization.
 
-\end{frame}
-\begin{frame}
-  \frametitle{Curse of Dimensionality}
-  \begin{center}
-    \includegraphics[scale=0.3]{figures/dimensionality.png}
-  \end{center}
-\end{frame}
-% \begin{frame}
-%   \frametitle{Structure}
-%   We want to get sets of coefficients that allow interpretation of
-%   psychophysical or psychological effects from particular tasks. But a brain has
-%   a certain structure, this coefficients cannot appear anywhere.
-
-%   Then, favor that neighbor voxels show consistent activation patterns. For
-%   example, using anatomical priors.
-% \end{frame}
-\begin{frame}[t,shrink]
-  \frametitle{Sparsity and Structure\footprnifullcite{baldassarre2012a}}
-  From an experimental point of view, we expect to see increased activation in particular brain
-  areas which corresponds to a sparse solution.
-  
-  However, a highly sparse model is prone to yield spatially incoherent activation
-  patterns where features are picked up just to increase classification
-  performance, ignoring others experimentally relevant.
-
-  We can reduce the model sparsity with structural constraints, e.g. anatomical prior,
-  to recover relevant features consistently.
 \end{frame}
 \begin{frame}
   \frametitle{Example: Instability in Sparse Models}
@@ -413,56 +384,6 @@
   \begin{center}
     \includegraphics[scale=0.25]{figures/weights_sparse_synthetic_data_1.39_cbc.png} 
   \end{center}
-\end{frame}
-\begin{frame}[t,shrink]
-  \frametitle{Conclusions/Remarks}
-  % \fontsize{10pt}{8}\selectfont
-  In summary, these methods can find balanced solutions between dense and very
-  sparse models by being constrained by structural and/or temporal information used as
-  priors.
-
-  Structured sparsity offers
-  \begin{itemize}
-  \item interpretable results where coefficient maps are driven by data and
-    not from classifier behavior,
-  \item stable weight maps,
-  \item a more adequate decoding method for neuroimage data.
-  \end{itemize}
-
-  But,
-  \begin{itemize}
-  \item there may be loss of accuracy in favor of increase in recovery: helps
-    interpretation,
-  \item the parameter space needs to be optimized,
-  \item and can be slower than other methods.
-  \end{itemize}
-\end{frame}
-\begin{frame}
-  \frametitle{Software}
-  Implementations to try:
-  \begin{itemize}
-  \item nilearn (not officially released) \\
-\texttt{nilearn.github.io}
-
-\item neuroparser \\
-\texttt{github.com/logang/neuroparser}
-  \end{itemize}
-\end{frame}
-\begin{frame}[standout]
-    Thank you! \\
-    Questions?
-\end{frame}
-
-%% -- backup slides --
-%% backup slides go after appendix as normal frames. See theme documentation
-%% and include \usepackage{appendixnumberbeamer} so that they do not count
-%% towards the total number of slides in the main presentation
-\appendix
-\begin{frame}{Appendix}
-    SpaRSA implementation
-\end{frame}
-\begin{frame}{Taks fMRI Decoding}
-    Predict the behavioral task, i.e. category or class.
 \end{frame}
 \end{document}
 % Local Variables:
