@@ -336,6 +336,17 @@
 
 \end{frame}
 \begin{frame}
+  \frametitle{Example: Instability in Sparse Models}
+  An example of a highly sparse model: SVC with $l_1$ regularization and Haxby's
+  faces vs. houses
+    \begin{center}
+      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_7e41.png}
+      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_b073.png}
+    \end{center}
+    The outcome after running the same analysis with the same conditions: two
+    different weight maps.
+\end{frame}
+\begin{frame}
   \frametitle{Regularization: How does it do it?}
   Regularization is a term, \(J(\mathbf{w})\), added to the optimization problem:
   % \[\mathbf{y} = \mathbf{Xw} + \lambda{}J(\mathbf{w})\]
@@ -381,17 +392,6 @@
 
   This is an ill-posed problem, thus we need regularization.
 
-\end{frame}
-\begin{frame}
-  \frametitle{Example: Instability in Sparse Models}
-  An example of a highly sparse model: SVC with $l_1$ regularization and Haxby's
-  faces vs. houses
-    \begin{center}
-      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_7e41.png}
-      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_b073.png}
-    \end{center}
-    The outcome after running the same analysis with the same conditions: two
-    different weight maps.
 \end{frame}
 \end{document}
 % Local Variables:
