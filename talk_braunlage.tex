@@ -41,27 +41,35 @@
 
 \begin{frame}
     \frametitle{BOLD fMRI}
-    I work mainly in functional MRI (fMRI) data analysis, and, in particular,
-    task related. 
+    My work mainly focuses on analysis of task-related fMRI data. During
+    scanning, the participant performs a behavioral task
+
     \begin{center}
         \includegraphics[scale=0.25]{figures/scanner_task.png}
     \end{center}
 
-    This means that during scanning, the participant performs a behavioral task.
 
 \end{frame}
 \begin{frame}
     \frametitle{fMRI data}
 
-    Structural MRI images are 3-D. fMRI adds a new dimension: time. That
-    allows us to analyse how brain activity changes during the task.
+    The data resulting from fMRI is 4 dimensional (structural is 3-D). The extra
+    time dimension allows us to analyse how brain activity changes during the
+    task.
+
+    \vspace*{-0.25cm}
 
     \begin{center}
         \includegraphics[scale=0.25]{figures/4d_data.png}
     \end{center}
 
-    A typical fMRI session consists of around $10^2$ 3-D volumes, and each 3-D
-    volume contains $10^5$ to $10^6$ voxels.
+    \vspace*{-0.6cm}
+
+    A typical fMRI session consists of:
+    \begin{itemize}
+        \item 600-900 3-D volumes with $10^5$ to $10^6$ voxels each.
+        \item Voxel resolution varies from 1 (ultra-high) to 3 mm$^3$.
+    \end{itemize}
 
 \end{frame}
 \begin{frame}
@@ -96,19 +104,19 @@
 
 \begin{frame}
     \frametitle{Model}
-    Our proposal to answer those questions is to use a linear model. We need
-    some help, however. We have too many voxels (features) and too few images
-    (samples). 
+    Our proposal to answer those questions is to use a linear model. 
 
     \[y = Xw\]
 
-    That is why we add an extra term to the problem to be solved called
+    But, we have too many voxels (features) and too few images (samples). That
+    is why we add an extra term to the problem to be solved called
     regularization, $J(w)$.
 
     \[\hat{w} = \argmin_{w} \mathcal{L}\left(y, X, w \right) + J(w) \]
 
-    The solution that we obtain is a vector of weights, $\hat{w}$. One weight
-    per voxel.
+    The solution that we obtain is a vector of weights, $\hat{w}$ with one
+    weight per voxel: the weight map.  
+
 \end{frame}
 
 \begin{frame}{If things were this easy\ldots}
@@ -117,37 +125,50 @@
     \begin{center}
         \includegraphics[scale=0.3]{figures/grad_descent_result.png}        
     \end{center}
+
+    In neuroimaging, we have thousands of features and we cannot plot the data.
+    Instead, we show the weight map.
+
 \end{frame}
 
-\begin{frame}[t]{How does it look with real data?}
+\begin{frame}[squeeze]{A real experiment}
 
-    In this task, participants could be in any of four different rooms. The
-    accuracy (ACC) tell us that most of the time the decoder identifies the
-    right room.
+    In this task, participants could be in any of four different rooms.
+
+    \vspace*{-1cm}
 
     \begin{center}
         \includegraphics[scale=0.7]{figures/lsvc_l2-axial.png}
     \end{center}
 
-    This is a \emph{dense} solution; all weights are different from zero. But,
-    we would like to automatically select the most relevant voxels, and
-    make the rest 0.
+    \begin{enumerate}
+        \item The accuracy (ACC) tells us most of the time the right room is
+            identified (25\% is random guess).
+        \item The weight map is \emph{dense}: all weights are $\neq$ 0.
+    \end{enumerate}
+
+    Which voxels are the most relevant?
 
 \end{frame}
-
 \begin{frame}
     \frametitle{Sparsity}
 
     We can also find a \emph{sparse} solution, i.e., many voxel weights are set
     to 0.
+    
+    \vspace*{-1cm}
 
     \begin{center}
         \includegraphics[scale=0.7]{figures/lsvc_l1-axial.png}
     \end{center}
 
-    In this solution many non-relevant voxels do not appear anymore, but are
-    those voxels remaining in the weight map too few and scattered? Is that
-    solution unique?
+    \begin{enumerate}
+        \item Accuracy is even better.
+        \item Non-relevant voxels are set to 0, but some relevant may be too
+            (e.g., correlated voxels)!
+    \end{enumerate}
+
+    Is the solution unique?
 
 \end{frame}
 
@@ -158,7 +179,7 @@
 \begin{frame}
     \frametitle{Why structured sparsity?\footprnifullcite{baldassarre2012a}}
 
-    So far pros and cons.
+    Summary so far:
 
     \begin{center}
         \begin{tabular}[h]{@{}lll@{}}
@@ -171,14 +192,14 @@
     
     \pause
 
-    Structured sparsity offers a middle ground solution where whole relevant
-    areas are selected and the solution is stable.
+    Structured sparsity offers a middle ground solution that is stable and
+    selects whole relevant areas.
 
 \end{frame}
 
 \begin{frame}
     \frametitle{Structured sparsity}
-    In a multivariate analysis,
+    In a multivariate analysis wishlist,
     \begin{itemize}
         \item take into consideration spatial and temporal information, \pause
         \item recover the \emph{true} weight maps, \pause
@@ -194,7 +215,7 @@
 \begin{frame}
     \frametitle{BrainOwl}
     BrainOwl is a classifier based on the \emph{Ordered Weighted} $l_1$
-    (OWL)\footlessfullcite{zeng2014-owl} norm.
+    (OWL)\footlessfullcite{zeng2014-owl, bogdan-2015} norm.
 
     \[J_v(w) = \sum_{i=1}^{n} |w|_{[i]} v_i = v^T |w|_{\downarrow}\]
 
@@ -205,26 +226,39 @@
 \begin{frame}
     \frametitle{Rooms question revisited}
 
+    \vspace*{-2cm}
+
     \begin{center}
         \includegraphics[scale=0.7]{figures/brainowl-axial.png}
     \end{center}
 
+    \begin{enumerate}
+        \item Accuracy close to sparse solution.
+        \item Weight map now shows only selected areas.
+    \end{enumerate}
+
 \end{frame}
 
 \begin{frame}
-    \frametitle{Dense, sparse, and structured sparse}
+    \frametitle{Summary: dense, sparse, and structured sparse}
+
+    \begin{center}
+        \includegraphics[scale=0.45]{figures/dense_sparse_structured-sparse.png}
+    \end{center}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Software}
-  \begin{itemize}
-      \item BrainOwl \\ \texttt{github.com/jpvaldes/brainowl}
-          \\ Soon in \texttt{www.wolberslab.net}
-      \item nilearn \\ \texttt{nilearn.github.io}
-      \item scikit-learn \\ \texttt{scikit-learn.org}
-  \end{itemize}
+    \frametitle{Software}
+    \begin{itemize}
+        \item BrainOwl \\ \texttt{github.com/jpvaldes/brainowl}
+            \\ Soon in \texttt{www.wolberslab.net}
+        \item nilearn contains alternative decoders (TV-L$_1$, GraphNet) \\ 
+            \texttt{nilearn.github.io}
+        \item scikit-learn \\ \texttt{scikit-learn.org}
+    \end{itemize}
 \end{frame}
+
 \begin{frame}[standout]
     Thank you! \\
     Questions?
@@ -235,8 +269,8 @@
 %% and include \usepackage{appendixnumberbeamer} so that they do not count
 %% towards the total number of slides in the main presentation
 \appendix
-\begin{frame}
-    \frametitle{Summary}
+\begin{frame}[t]
+    \frametitle{Other structured sparsity decoders}
     
     \begin{center}
         \includegraphics[scale=0.35]{figures/template_and_weights_4_clfs.png}
