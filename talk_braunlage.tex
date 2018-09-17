@@ -280,7 +280,49 @@
     \emph{Sparse Total Variation} (TV-$l_1$)\footprnifullcite{gramfort2013} or
     \emph{Graph-Net}\footlessfullcite{grosenick2013}.
 
+\end{frame}
+\begin{frame}[t,shrink]
+  \frametitle{Structured Sparsity: Graph-Net\footlessfullcite{grosenick2013}}
+  Basic idea: look for a regularization term promoting sparsity and imposing
+  structure at the same time.
 
+  The starting point is the \emph{Elastic-Net}, a regression problem with
+  \[J(\mathbf{w}) = \lambda_{1}\lVert{\mathbf{w}}\rVert_{1} + 
+    \lambda_{2}\lVert{\mathbf{w}}\rVert_{2}^{2}\]
+
+  where the \(l_{2}\) term is substituted by a new term
+  \(\lambda_{G}\lVert{\mathbf{w}}\rVert_{G}^{2}\). The new term can incorporate
+  spatial and temporal information, e.g. using the discrete Laplacian.
+
+  Derivatives of the coefficients encourage smooth solutions
+  (i.e., penalize roughness) while the $l_{1}$ term promotes sparse solutions. 
+
+\end{frame}
+\begin{frame}
+  \frametitle{Structured Sparsity: TV-$l_1$\footprnifullcite{gramfort2013}}
+  The idea behind \emph{Sparse Total Variation} (TV-$l_{1}$) is similar to
+  Graph-Net. 
+
+  \[J(\mathbf{w}) = \lambda \left( \lVert{\mathbf{w}}\rVert _{1} + 
+   \lVert{\nabla\mathbf{w}}\rVert _{1}\right) \]
+
+  This time, the TV term, $\lVert{\nabla\mathbf{w}}\rVert _{1}$ favors sharp
+  contours and piece-wise constant solutions to the regression problem, in contrast
+  with the Graph-Net that prefers smoother solutions.
+\end{frame}
+\begin{frame}[t]
+  \frametitle{Example: Noisy Data}
+  A set of simulated noisy data consisting of 30 samples and 2 clases. 
+  \begin{center}
+    \includegraphics[scale=0.25]{figures/weights_synthetic_data_2.62_cbc.png} 
+  \end{center}
+\end{frame}
+\begin{frame}[t]
+  \frametitle{Example: Noisier Data}
+  Same ground truth but noisier data.
+  \begin{center}
+    \includegraphics[scale=0.25]{figures/weights_sparse_synthetic_data_1.39_cbc.png} 
+  \end{center}
 \end{frame}
 \begin{frame}
   \frametitle{Regularization: Purpose}
@@ -350,49 +392,6 @@
     \end{center}
     The outcome after running the same analysis with the same conditions: two
     different weight maps.
-\end{frame}
-\begin{frame}[t,shrink]
-  \frametitle{Structured Sparsity: Graph-Net\footlessfullcite{grosenick2013}}
-  Basic idea: look for a regularization term promoting sparsity and imposing
-  structure at the same time.
-
-  The starting point is the \emph{Elastic-Net}, a regression problem with
-  \[J(\mathbf{w}) = \lambda_{1}\lVert{\mathbf{w}}\rVert_{1} + 
-    \lambda_{2}\lVert{\mathbf{w}}\rVert_{2}^{2}\]
-
-  where the \(l_{2}\) term is substituted by a new term
-  \(\lambda_{G}\lVert{\mathbf{w}}\rVert_{G}^{2}\). The new term can incorporate
-  spatial and temporal information, e.g. using the discrete Laplacian.
-
-  Derivatives of the coefficients encourage smooth solutions
-  (i.e., penalize roughness) while the $l_{1}$ term promotes sparse solutions. 
-
-\end{frame}
-\begin{frame}
-  \frametitle{Structured Sparsity: TV-$l_1$\footprnifullcite{gramfort2013}}
-  The idea behind \emph{Sparse Total Variation} (TV-$l_{1}$) is similar to
-  Graph-Net. 
-
-  \[J(\mathbf{w}) = \lambda \left( \lVert{\mathbf{w}}\rVert _{1} + 
-   \lVert{\nabla\mathbf{w}}\rVert _{1}\right) \]
-
-  This time, the TV term, $\lVert{\nabla\mathbf{w}}\rVert _{1}$ favors sharp
-  contours and piece-wise constant solutions to the regression problem, in contrast
-  with the Graph-Net that prefers smoother solutions.
-\end{frame}
-\begin{frame}[t]
-  \frametitle{Example: Noisy Data}
-  A set of simulated noisy data consisting of 30 samples and 2 clases. 
-  \begin{center}
-    \includegraphics[scale=0.25]{figures/weights_synthetic_data_2.62_cbc.png} 
-  \end{center}
-\end{frame}
-\begin{frame}[t]
-  \frametitle{Example: Noisier Data}
-  Same ground truth but noisier data.
-  \begin{center}
-    \includegraphics[scale=0.25]{figures/weights_sparse_synthetic_data_1.39_cbc.png} 
-  \end{center}
 \end{frame}
 \end{document}
 % Local Variables:
