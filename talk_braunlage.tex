@@ -7,10 +7,12 @@
 \metroset{outer/numbering=none}
 \metroset{outer/progressbar=frametitle}
 \metroset{background=light}
-\usepackage[math-style=upright]{unicode-math}
-\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
+\usepackage[math-style=TeX]{unicode-math}
+\setmainfont[Ligatures=TeX]{Fira Sans}
+% \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
 % \setsansfont[Ligatures=TeX]{TeX Gyre Pagella}
 % \setmathfont[Scale=MatchLowercase]{TeX Gyre Pagella Math}
+\setmathfont[Scale=MatchLowercase,math-style=TeX]{xits-math.otf}
 \usepackage{appendixnumberbeamer}
 \usepackage{booktabs}
 \usepackage[backend=biber,style=chem-acs,autocite=footnote]{biblatex}
@@ -63,8 +65,8 @@
 
     A typical fMRI session consists of:
     \begin{itemize}
-        \item 600-900 3-D volumes with $10^5$ to $10^6$ voxels each.
-        \item Voxel resolution varies from 1 (ultra-high) to 3 mm$^3$.
+        \item 600-900 3-D volumes with 10$\mathrm{^5}$ to 10$\mathrm{^6}$ voxels each.
+        \item Voxel resolution varies from 1 (ultra-high) to 3 mm$\mathrm{^3}$.
     \end{itemize}
 
 \end{frame}
@@ -108,7 +110,7 @@
     is why we add an extra term to the problem to be solved called
     regularization, $J(w)$.
 
-    \[\hat{w} = \argmin_{w} \mathcal{L}\left(y, X, w \right) + J(w) \]
+    \[\hat{w} = \mathrm{arg\,min}_{w} \mathcal{L}\left(y, X, w \right) + J(w) \]
 
     The solution that we obtain is a vector of weights, $\hat{w}$ with one
     weight per voxel: the weight map.  
