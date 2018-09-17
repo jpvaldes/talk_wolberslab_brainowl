@@ -47,77 +47,31 @@ url = {http://dx.doi.org/10.1016/j.neuroimage.2012.12.062},
 volume = {72},
 year = {2013}
 }
-@misc{zeng2014-owl,
-    abstract = {The ordered weighted \$\ell\_1\$ norm (OWL) was recently proposed, with two
-different motivations: its good statistical properties as a sparsity promoting
-regularizer; the fact that it generalizes the so-called {\it octagonal
-shrinkage and clustering algorithm for regression} (OSCAR), which has the
-ability to cluster/group regression variables that are highly correlated. This
-paper contains several contributions to the study and application of OWL
-regularization: the derivation of the atomic formulation of the OWL norm; the
-derivation of the dual of the OWL norm, based on its atomic formulation; a new
-and simpler derivation of the proximity operator of the OWL norm; an efficient
-scheme to compute the Euclidean projection onto an OWL ball; the instantiation
-of the conditional gradient (CG, also known as Frank-Wolfe) algorithm for
-linear regression problems under OWL regularization; the instantiation of
-accelerated projected gradient algorithms for the same class of problems.
-Finally, a set of experiments give evidence that accelerated projected gradient
-algorithms are considerably faster than CG, for the class of problems
-considered.},
-    archivePrefix = {arXiv},
+@article{zeng2014-owl,
     author = {Zeng, Xiangrong and Figueiredo, M\'{a}rio A. T.},
+    journal = {arXiv},
     citeulike-article-id = {14476559},
     citeulike-linkout-0 = {http://arxiv.org/abs/1409.4271},
     citeulike-linkout-1 = {http://arxiv.org/pdf/1409.4271},
     eprint = {1409.4271},
     keywords = {fista, fused-lasso, machine-learning, owl, structured\_sparsity},
     posted-at = {2017-11-15 15:02:39},
-    priority = {3},
-    title = {The Ordered Weighted \$\ell\_1\$ Norm: Atomic Formulation, Projections, and Algorithms},
+    % title = {The Ordered Weighted $l_1$ Norm: Atomic Formulation, Projections, and Algorithms},
     url = {http://arxiv.org/abs/1409.4271},
     year = {2015}
 }
 @article{bogdan-2015,
-    abstract = {We introduce a new estimator for the vector of coefficients \$\beta\$ in the
-linear model \$y=X\beta+z\$, where \$X\$ has dimensions \$n\times p\$ with \$p\$
-possibly larger than \$n\$. SLOPE, short for Sorted L-One Penalized Estimation,
-is the solution to \[\min\_{b\in\mathbb{R}^p}\frac{1}{2}\Vert y-Xb\Vert
-\_{\ell\_2}^2+\lambda\_1\vert b\vert \_{(1)}+\lambda\_2\vert
-b\vert\_{(2)}+\cdots+\lambda\_p\vert b\vert\_{(p)},\] where
-\$\lambda\_1\ge\lambda\_2\ge\cdots\ge\lambda\_p\ge0\$ and \$\vert
-b\vert\_{(1)}\ge\vert b\vert\_{(2)}\ge\cdots\ge\vert b\vert\_{(p)}\$ are the
-decreasing absolute values of the entries of \$b\$. This is a convex program and
-we demonstrate a solution algorithm whose computational complexity is roughly
-comparable to that of classical \$\ell\_1\$ procedures such as the Lasso. Here,
-the regularizer is a sorted \$\ell\_1\$ norm, which penalizes the regression
-coefficients according to their rank: the higher the rank - that is, stronger
-the signal - the larger the penalty. This is similar to the Benjamini and
-Hochberg [J. Roy. Statist. Soc. Ser. B 57 (1995) 289-300] procedure (BH) which
-compares more significant \$p\$-values with more stringent thresholds. One
-notable choice of the sequence \$\{\lambda\_i\}\$ is given by the BH critical
-values \$\lambda\_{\mathrm {BH}}(i)=z(1-i\cdot q/2p)\$, where \$q\in(0,1)\$ and
-\$z(\alpha)\$ is the quantile of a standard normal distribution. SLOPE aims to
-provide finite sample guarantees on the selected model; of special interest is
-the false discovery rate (FDR), defined as the expected proportion of
-irrelevant regressors among all selected predictors. Under orthogonal designs,
-SLOPE with \$\lambda\_{\mathrm{BH}}\$ provably controls FDR at level \$q\$.
-Moreover, it also appears to have appreciable inferential properties under more
-general designs \$X\$ while having substantial power, as demonstrated in a series
-of experiments running on both simulated and real data.},
     author = {Bogdan, Ma{\l}gorzata and van den Berg, Ewout and Sabatti, Chiara and Su, Weijie and Cand\`{e}s, Emmanuel J.},
-    doi = {10.1214/15-aoas842},
+    % doi = {10.1214/15-aoas842},
     eprint = {1407.3824},
     issn = {1932-6157},
     journal = {The Annals of Applied Statistics},
     keywords = {owl, slope, structured\_sparsity},
-    month = nov,
     number = {3},
-    pages = {1103--1140},
     pmcid = {PMC4689150},
     pmid = {26709357},
     posted-at = {2017-11-22 12:42:27},
     title = {{SLOPE} - Adaptive variable selection via convex optimization},
     url = {http://dx.doi.org/10.1214/15-aoas842},
-    volume = {9},
     year = {2015}
 }
