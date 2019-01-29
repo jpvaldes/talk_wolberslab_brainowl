@@ -38,17 +38,6 @@
 \section{fMRI refresher}
 
 \begin{frame}
-    \frametitle{BOLD fMRI}
-    My work mainly focuses on analysis of task-related fMRI data. During
-    scanning, the participant performs a behavioral task.
-
-    \begin{center}
-        \includegraphics[scale=0.25]{figures/scanner_task.png}
-    \end{center}
-
-
-\end{frame}
-\begin{frame}
     \frametitle{fMRI data}
 
     The data resulting from fMRI is 4 dimensional (structural is 3-D). The extra
@@ -60,14 +49,6 @@
     \begin{center}
         \includegraphics[scale=0.25]{figures/4d_data.png}
     \end{center}
-
-    \vspace*{-0.6cm}
-
-    A typical fMRI session consists of:
-    \begin{itemize}
-        \item 600-900 3-D volumes with 10$\mathrm{^5}$ to 10$\mathrm{^6}$ voxels each.
-        \item Voxel resolution varies from 1 (ultra-high) to 3 mm$\mathrm{^3}$.
-    \end{itemize}
 
 \end{frame}
 \begin{frame}
@@ -189,6 +170,18 @@
 
     Is the solution unique?
 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Is the solution unique? Not necessarily}
+  An example of a highly sparse model: SVC with $l_1$ regularization and Haxby's
+  faces vs. houses
+    \begin{center}
+      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_7e41.png}
+      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_b073.png}
+    \end{center}
+    The outcome after running the same analysis with the same conditions: two
+    different weight maps.
 \end{frame}
 
 \section{Structured sparsity}
@@ -355,17 +348,6 @@
     dimensions is very high (because it is ill-posed).
   \end{itemize}
 
-\end{frame}
-\begin{frame}
-  \frametitle{Example: Instability in Sparse Models}
-  An example of a highly sparse model: SVC with $l_1$ regularization and Haxby's
-  faces vs. houses
-    \begin{center}
-      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_7e41.png}
-      \includegraphics[scale=0.22]{figures/haxby_svc_plotmap_b073.png}
-    \end{center}
-    The outcome after running the same analysis with the same conditions: two
-    different weight maps.
 \end{frame}
 \begin{frame}
   \frametitle{Regularization: How does it do it?}
