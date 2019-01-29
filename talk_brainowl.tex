@@ -27,7 +27,7 @@
 %% Title / Front matter
 \title{Introducing the BrainOwl}
 \date{Wolberslab Lab Meeting, 30.1.2019}
-\author{José P Valdés-Herrera}
+\author{José Pedro Valdés Herrera}
 \institute{\includegraphics[scale=0.2]{figures/DZNE_CMYK.png}\hspace{1cm}
   \includegraphics[scale=0.15]{figures/wolberslab_neg.png}}
 
@@ -35,7 +35,7 @@
 
 \maketitle
 
-\section{fMRI refresher}
+\section{fMRI univariate data analysis}
 
 \begin{frame}
     \frametitle{fMRI data}
@@ -63,7 +63,7 @@
 
 \end{frame}
 
-\section{Decoding}
+\section{fMRI multivariate analysis: decoding}
 \label{sec:Decoding}
 
 \begin{frame}
@@ -91,7 +91,8 @@
     is why we add an extra term to the problem to be solved called
     regularization, $J(w)$.
 
-    \[\hat{w} = \mathrm{arg\,min}_{w} \mathcal{L}\left(y, X, w \right) + J(w) \]
+    \[\hat{w} = \underset{w}{\operatorname{arg\,min}} \,
+        \mathcal{L}\left(y, X, w \right) + J(w) \]
 
     The solution that we obtain is a vector of weights, $\hat{w}$ with one
     weight per voxel: the weight map.  
@@ -197,8 +198,8 @@
         \begin{tabular}[h]{@{}lll@{}}
             & Pros & Cons \\
             \cmidrule(r){2-3}
-            Dense & stable & all voxels appear relevant \\
-            Sparse & few chosen voxels & unstable
+            Dense ($l_2$) & stable & all voxels appear relevant \\
+            Sparse ($l_1$) & few chosen voxels & unstable
         \end{tabular}
     \end{center} 
     
@@ -261,19 +262,27 @@
 
 
 \begin{frame}
-    \frametitle{Software}
+    \frametitle{Final words}
+
+    BrainOwl was developed for whole brain decoding, but it is not only limited
+    to that. It can be used with any categorical data (classification) that you
+    have. From other neuroimaging techniques (e.g. MEG, EEG) to behavioral
+    tests, for example.
+
+    Useful links:
     \begin{itemize}
         \item BrainOwl \\ \texttt{github.com/jpvaldes/brainowl}
             \\ Soon in \texttt{www.wolberslab.net}
+            \\ Simply install with \texttt{pip install brainowl}
         \item nilearn contains alternative decoders (TV-L$_1$, GraphNet) \\ 
             \texttt{nilearn.github.io}
-        \item scikit-learn \\ \texttt{scikit-learn.org}
+        \item scikit-learn, ML library \\ \texttt{scikit-learn.org}
     \end{itemize}
 \end{frame}
 
 \begin{frame}[standout]
     Thank you! \\
-    Questions?
+    Now, \emph{live demo time}.
 \end{frame}
 
 %% -- backup slides --
@@ -281,6 +290,7 @@
 %% and include \usepackage{appendixnumberbeamer} so that they do not count
 %% towards the total number of slides in the main presentation
 \appendix
+\section{Extra slides}
 \begin{frame}[t]
     \frametitle{Other structured sparsity decoders}
     
